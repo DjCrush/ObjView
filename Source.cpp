@@ -1,15 +1,22 @@
 #include <SDL.h>
 #include <cstdlib>
+#include <Windows.h>
 #include "mygraphicslib.h"
 #include "object.h"
 
+
+
+
 using namespace std;
+
+
+SDL_Surface *screen;
+SDL_Surface *font;
 
 
 int wmain(int argc, wchar_t *argv[], wchar_t *envp[])
 {
 	SDL_Event event;
-	SDL_Surface *screen;
 	int keypress = 0;
 	
 
@@ -26,19 +33,27 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[])
 		return 1;
 	}
 	
-	font = SDL_LoadBMP("font.bmp");
+	if (!(font = SDL_LoadBMP("font.bmp")))
+	{
+		
+		MessageBoxA(NULL, "File 'font.bmp' not found", "Error", MB_OK);
+
+		SDL_Quit();
+		return 1;
+	}
 
 	Object tor;
-//	tor.ReadObjectFromOBJ("E:/EXP/3dmax/obj/alfa147.obj", screen); float scale = 3;
-	tor.ReadObjectFromOBJ("E:/EXP/3dmax/obj/1.obj", screen); float scale = 300;
+	//tor.ReadObjectFromOBJ("E:/EXP/3dmax/obj/alfa147.obj"); float scale = 3;
+	tor.ReadObjectFromOBJ("E:/EXP/3dmax/obj/1.obj"); float scale = 300;
 	//tor.ReadObjectFromOBJ("mod.obj"); float scale = 3;
-	//tor.ReadObjectFromOBJ("E:/EXP/3dmax/obj/bmw/BMWX12013/BMW X1 Obj (w).obj", screen); float scale = 0.5;
-	//tor.ReadObjectFromOBJ("E:/EXP/3dmax/obj/hand/hand.obj", screen); float scale = 200;
+	//tor.ReadObjectFromOBJ("E:/EXP/3dmax/obj/bmw.obj"); float scale = 0.5;
+	//tor.ReadObjectFromOBJ("E:/EXP/3dmax/obj/hand/hand.obj"); float scale = 200;
 
 	while (!keypress)
 	{
-		ClsScreen(screen);
-		tor.Draw(screen, WIDTH / 2, HEIGHT / 2, scale);
+		ClsScreen();
+	//	tor.Draw(WIDTH / 2, HEIGHT / 2, scale);
+		tor.DrawGuro(WIDTH / 2, HEIGHT / 2, scale);
 		tor.Rotate(0.5);
 		while (SDL_PollEvent(&event))
 		{
@@ -57,7 +72,7 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[])
 	
 
 
-	
+	SDL_FreeSurface(font);
 	SDL_FreeSurface(screen);
 	SDL_Quit();
 
