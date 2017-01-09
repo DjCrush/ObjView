@@ -8,7 +8,9 @@ extern const int WIDTH;
 extern const int HEIGHT;
 extern const int BPP;
 extern const int DEPTH;
-extern const float M_PI;
+// extern const float M_PI;
+
+
 extern SDL_Surface *screen;
 extern SDL_Surface *font;
 

@@ -1,6 +1,5 @@
 #include <SDL.h>
 #include <cstdlib>
-#include <Windows.h>
 #include "mygraphicslib.h"
 #include "object.h"
 
@@ -14,11 +13,11 @@ SDL_Surface *screen;
 SDL_Surface *font;
 
 
-int wmain(int argc, wchar_t *argv[], wchar_t *envp[])
+int main(int argc, char *argv[])
 {
 	SDL_Event event;
 	int keypress = 0;
-	
+
 
 
 
@@ -26,17 +25,17 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[])
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) return 1;
 
-	
+
 	if (!(screen = SDL_SetVideoMode(WIDTH, HEIGHT, DEPTH, SDL_HWSURFACE)))
 	{
 		SDL_Quit();
 		return 1;
 	}
-	
+
 	if (!(font = SDL_LoadBMP("font.bmp")))
 	{
-		
-		MessageBoxA(NULL, "File 'font.bmp' not found", "Error", MB_OK);
+
+		fprintf(stderr, "File 'font.bmp' not found\n");
 
 		SDL_Quit();
 		return 1;
@@ -69,7 +68,7 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[])
 		}
 	}
 
-	
+
 
 
 	SDL_FreeSurface(font);

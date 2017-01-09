@@ -1,5 +1,7 @@
 #include "object.h"
 
+using namespace std;
+
 Object::Object()
 {
 
@@ -93,7 +95,7 @@ void Object::Rotate(float AngleX)
 	ssm = sin(AngleX * M_PI);
 	for (size_t l = 0; l < faces.size(); l++)
 	{
-		
+
 		// Rotate vertexes
 		temp = faces[l].x1*ccm - faces[l].z1*ssm;
 		faces[l].z1 = faces[l].x1*ssm + faces[l].z1*ccm;
@@ -101,7 +103,7 @@ void Object::Rotate(float AngleX)
 		temp = faces[l].x2*ccm - faces[l].z2*ssm;
 		faces[l].z2 = faces[l].x2*ssm + faces[l].z2*ccm;
 		faces[l].x2 = temp;
-		 
+
 		temp = faces[l].x3*ccm - faces[l].z3*ssm;
 		faces[l].z3 = faces[l].x3*ssm + faces[l].z3*ccm;
 		faces[l].x3 = temp;
@@ -145,10 +147,10 @@ void Object::ReadObjectFromOBJ(const char* filename)
 	// get length of file
 	in.seekg(0, in.end);
 	length_of_file = in.tellg();
-	in.seekg(0, in.beg);  
-	
+	in.seekg(0, in.beg);
+
 	Old_time = SDL_GetTicks()+200;
-	
+
 	while (!in.eof())
 	{
 		getline(in, line);
@@ -265,8 +267,8 @@ void Object::ReadObjectFromOBJ(const char* filename)
 					}
 
 				}
-				
-				
+
+
 				faces.push_back(polygon(vertex[point3].x, vertex[point3].y, vertex[point3].z,
 					vertex[point4].x, vertex[point4].y, vertex[point4].z,
 					vertex[point1].x, vertex[point1].y, vertex[point1].z,
@@ -295,10 +297,10 @@ void Object::ReadObjectFromOBJ(const char* filename)
 			SDL_Flip(screen);
 		}
 
-		
+
 	}
 
-	
+
 	Begunok.w = 1024;
 	SDL_FillRect(screen, &Begunok, 255);
 	SDL_Flip(screen);
