@@ -1,27 +1,31 @@
 #include "mygraphicslib.h"
 
-
 const int WIDTH = 1024;
 const int HEIGHT = 768;
 const int WH = HEIGHT*WIDTH;
 const int BPP = 4;
 const int DEPTH = 32;
-const float M_PI = 3.1415926535897932384626433832795028841971f / 180;
-int *Z_buffer = new int[WIDTH * HEIGHT * 10];
+// already defined as a constant, cannot be overriden
+// const float M_PI = 3.1415926535897932384626433832795028841971f / 180.0;
 
+
+int *Z_buffer = new int[WIDTH * HEIGHT * 10];
 
 
 void ClsScreen()
 {
-	
+
 	Uint32 *memory_screen = (Uint32*)screen->pixels;
-	
+
+// gcc uses AT&T assembler syntax, not Intel's
+#if 0
 	_asm {
 		mov ecx, WH
 		mov esi, memory_screen
 
 	}
-	
+#endif
+
 	for (int x = 0; x < HEIGHT*WIDTH; x++)	*memory_screen++ = 2949247;
 
 }
@@ -146,7 +150,7 @@ void TriangleGradient(int x1, int x2, int x3, int y1, int y2, int y3, int z1, in
 		int sann = x3*y1 - y3*x1, tann = x1*y2 - y1*x2, snn, tnn;
 		int idx, zbb, y, x, col;
 		float alpha, beta, th, sh;
-		
+
 		if (!Denom) Denom = 1;
 		if (y1 > y2) { swap(y1, y2); swap(x1, x2); swap(z1, z2); }
 		if (y1 > y3) { swap(y1, y3); swap(x1, x3); swap(z1, z3); }
