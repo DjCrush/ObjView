@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <SDL.h>
-
 using namespace std;
 
 extern const int WIDTH;
@@ -11,7 +10,6 @@ extern const int DEPTH;
 extern const float M_PI;
 extern SDL_Surface *screen;
 extern SDL_Surface *font;
-
 extern int *Z_buffer;
 
 void inline SetPixel(int x, int y, int col);
