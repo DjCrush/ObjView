@@ -7,7 +7,7 @@ const int DEPTH = 32;
 const float M_PI = 3.1415926535897932384626433832795028841971f / 180;
 int *Z_buffer = new int[WIDTH * HEIGHT * 10];
 
-void ClsScreen()
+void ClearScreen()
 {
 	for (int x = 0; x < HEIGHT*WIDTH; x++)	*memory_screen++ = 2949247;
 }
