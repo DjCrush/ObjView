@@ -35,7 +35,7 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[])
 	//tor.ReadObjectFromOBJ("E:/EXP/3dmax/obj/hand/hand.obj"); float scale = 200;
 	while (!keypress)
 	{
-		ClsScreen();
+		ClearScreen();
 	//	tor.Draw(WIDTH / 2, HEIGHT / 2, scale);
 		tor.DrawGuro(WIDTH / 2, HEIGHT / 2, scale);
 		tor.Rotate(0.5);
@@ -55,6 +55,6 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[])
 	SDL_FreeSurface(font);
 	SDL_FreeSurface(screen);
 	SDL_Quit();
-	delete Z_buffer;
+	delete[] Z_buffer;
 	return 0;
 }
